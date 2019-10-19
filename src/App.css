@@ -1,22 +1,30 @@
 .App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
 .App-header {
   background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+  text-align: center;
 }
 
-.App-link {
-  color: #09d3ac;
+.App-content {
+  flex: auto;
+  display: flex;
+}
+
+.App-map {
+  flex: 1;
+}
+.App-map > div {
+  height: 100%;
+}
+.App-map .openlayers-map {
+  height: 100%;
+}
+.App-details {
+  flex: 1;
 }
