@@ -19,10 +19,9 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "prod": "npm run build:app; npm run build:lambda; npm run clean:lambda",
+    "prod": "npm run build:app; npm run build:lambda",
     "build:app": "react-scripts build; npm run build:lambda",
     "build:lambda": "netlify-lambda build src/lambda",
-    "clean:lambda": "rm built-lambda/precache-manifest.*.js built-lambda/service-worker.js",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
