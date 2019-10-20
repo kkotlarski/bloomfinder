@@ -16,17 +16,19 @@ class App extends React.Component {
       endDate: now.minus({days: 14}),
       data: null,
       willBloom: null,
+      error: null,
     }
   }
 
   handlePositionChange = (e) => {
     const [ lon, lat ] = e.lngLat;
-    this.setState({ lon, lat })
+    this.setState({ fetching: true, error: null })
     const { startDate, endDate } = this.state
 
     fetch(`/.netlify/functions/data?lat=${lat}&lng=${lon}&startDate=${startDate.toISODate()}&endDate=${endDate.toISODate()}`)
       .then(res => res.json())
-      .then(res => this.setState({ data: res.data, willBloom: res.willBloom }))
+      .then(res => this.setState({ data: res.data, willBloom: res.willBloom, lon, lat, fetching: false }))
+      .catch(error => this.setState({ fetching: false, error }))
   }
 
   willBloomToString(willBloom) {
@@ -39,8 +41,32 @@ class App extends React.Component {
     }
   }
 
+  renderDetails() {
+    const { lon, lat, data, fetching, error, willBloom, startDate, endDate } = this.state
+
+    if (error) {
+      return <p style={{color: 'red'}}>Failed to fetch data, try with different location</p>
+    }
+
+    const progress = fetching && <p>Fetching data...</p>
+    const details = data && (
+      <div>
+        <p>{Boolean(lon && lat) && formatPair({ lat, lon})} {startDate.toISODate()} - {endDate.toISODate()}</p>
+        <Chart data={data} dataKey="temperature" name="Temperature (C)" />
+        <Chart data={data} dataKey="chlorA" name="Chlorophyll A (mg m^-3)" />
+        <h3>Probability of blooming: {this.willBloomToString(willBloom)}</h3>
+      </div>
+    );
+
+    return (
+      <div>
+        {progress}
+        {details}
+      </div>
+    )
+  }
+
   render() {
-    const { lon, lat, data, willBloom, startDate, endDate } = this.state
 
     return (
       <div className="App">
@@ -52,10 +78,7 @@ class App extends React.Component {
             <Map onChange={this.handlePositionChange} />
           </div>
           <div className="App-details">
-            <p>{Boolean(lon && lat) && formatPair({ lat, lon})} {startDate.toISODate()} - {endDate.toISODate()}</p>
-            <Chart data={data} dataKey="temperature" name="Temperature (C)" />
-            <Chart data={data} dataKey="chlorA" name="Chlorophyll A (mg m^-3)" />
-            <h3>Probability of blooming: {this.willBloomToString(willBloom)}</h3>
+            {this.renderDetails()}
           </div>
         </div>
       </div>
