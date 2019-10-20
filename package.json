@@ -5,6 +5,7 @@
   "dependencies": {
     "@mapbox/sexagesimal": "^1.2.0",
     "install": "^0.13.0",
+    "lodash.sortby": "^4.7.0",
     "luxon": "^1.19.3",
     "netlify-lambda": "^1.6.3",
     "npm": "^6.12.0",

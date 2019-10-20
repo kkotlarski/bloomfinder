@@ -25,7 +25,6 @@ export default ({data, dataKey, name}) => (
             <CartesianGrid strokeDasharray="3 3" />
             <Tooltip />
             <Area type="monotone" name={name} dataKey={dataKey} stroke={strokeColor[dataKey]} fillOpacity={1} fill={`url(#${dataKey})`} />
-            {/* <Area type="monotone" name="Temperature (C)" dataKey="chlorA" stroke="#82ca9d" fillOpacity={1} fill="url(#colorPv)" /> */}
         </AreaChart>
     </div>
 )

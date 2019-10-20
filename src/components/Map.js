@@ -15,7 +15,6 @@ export default class Map extends React.Component {
 
     handleClick = (e) => {
         const { onChange } = this.props
-        console.log(e)
         this.setState({ markerCoordinates: e.lngLat})
         if (onChange) {
             onChange({ lngLat: e.lngLat })
@@ -30,7 +29,7 @@ export default class Map extends React.Component {
 
     render() {
         const { markerCoordinates, viewport } = this.state
-        console.log(viewport)
+
         return (
             <MapGL
                 {...viewport}
