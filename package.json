@@ -5,11 +5,16 @@
   "dependencies": {
     "@mapbox/sexagesimal": "^1.2.0",
     "install": "^0.13.0",
+    "lodash.get": "^4.4.2",
+    "luxon": "^1.19.3",
     "npm": "^6.12.0",
     "react": "^16.10.2",
     "react-dom": "^16.10.2",
     "react-map-gl": "^5.0.12",
-    "react-scripts": "3.2.0"
+    "react-scripts": "3.2.0",
+    "recharts": "^1.8.3",
+    "request": "^2.88.0",
+    "xml2js": "^0.4.22"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -31,5 +36,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "netlify-lambda": "^1.6.3"
   }
 }
